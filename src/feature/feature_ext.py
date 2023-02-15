@@ -18,7 +18,7 @@ import numpy as np
 from src.common.constant import TSFParams
 from src.common.exception import FeatureException
 from src.common.utils_smooth import ext_smooth, ma_smooth
-from src.common.utils_ts import sr_algo
+from src.common.utils_time_series import sr_algo
 from src.common.utils_window import p_window_ext, f_window_ext, e_window_ext
 from src.model.kde import KDE
 
@@ -103,7 +103,7 @@ class TSAnomalousPattern:
                 idx_s = random.sample(list(range(x_window.shape[1])), self.sample_size)
                 window_obs[i, :, 0, :] = x_window[:, idx_s]
         else:
-            err = f'Periodic window extraction, dim>=3 is not supported.'
+            err = 'Periodic window extraction, dim>=3 is not supported.'
             raise FeatureException(err)
         return window_obs, cur_obs
 
@@ -161,7 +161,7 @@ class TSAnomalousPattern:
                 window_obs[i, :, 0, :] = e_window_ext(x_window, self.sample_size, type_='up')
                 window_obs[i, :, 1, :] = e_window_ext(x_window, self.sample_size, type_='fall')
         else:
-            err = f'Periodic differential window extraction, dim>=3 is not supported.'
+            err = 'Periodic differential window extraction, dim>=3 is not supported.'
             raise FeatureException(err)
         return window_obs, cur_obs
 
@@ -211,7 +211,7 @@ class TSAnomalousPattern:
                 window_obs[i, :, 0, :] = e_window_ext(x_window, self.sample_size, type_='up')
                 window_obs[i, :, 1, :] = e_window_ext(x_window, self.sample_size, type_='fall')
         else:
-            err = f'Differential window extraction, dim>=3 is not supported.'
+            err = 'Differential window extraction, dim>=3 is not supported.'
             raise FeatureException(err)
         return window_obs, cur_obs
 
@@ -256,7 +256,7 @@ class TSAnomalousPattern:
                 window_obs[i, :, 0, :] = e_window_ext(x_window, self.sample_size, type_='up')
                 window_obs[i, :, 1, :] = e_window_ext(x_window, self.sample_size, type_='fall')
         else:
-            err = f'Extreme window extraction, dim>=3 is not supported.'
+            err = 'Extreme window extraction, dim>=3 is not supported.'
             raise FeatureException(err)
         return window_obs, cur_obs
 
@@ -313,7 +313,7 @@ class TSAnomalousPattern:
                 window_obs[i, :, 1, :] = e_window_ext(x_window, self.sample_size, type_='up')
                 window_obs[i, :, 2, :] = e_window_ext(x_window, self.sample_size, type_='fall')
         else:
-            err = f'Spectral residual window extraction, dim>=3 is not supported.'
+            err = 'Spectral residual window extraction, dim>=3 is not supported.'
             raise FeatureException(err)
         return window_obs, cur_obs
 
@@ -361,7 +361,7 @@ class TSAnomalousPattern:
                 window_obs[i, :, 0, :] = e_window_ext(x_window, self.sample_size, type_='up')
                 window_obs[i, :, 1, :] = e_window_ext(x_window, self.sample_size, type_='fall')
         else:
-            err = f'Prediction error window extraction, dim>=3 is not supported.'
+            err = 'Prediction error window extraction, dim>=3 is not supported.'
             raise FeatureException(err)
         return window_obs, cur_obs
 

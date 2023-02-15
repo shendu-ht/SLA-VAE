@@ -61,3 +61,17 @@ class ModelException(VAException):
 
     def __str__(self):
         return f'MODEL ERROR: {self.err}.'
+
+
+class ServiceException(VAException):
+    """
+    Service Exception
+    """
+
+    def __init__(self, err):
+        super(ServiceException, self).__init__()
+        self.err = err
+        self.error_code = 4
+
+    def __str__(self):
+        return f'MODEL ERROR: {self.err}.'

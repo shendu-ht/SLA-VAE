@@ -3,7 +3,7 @@
 
 """
 @Project    : SLA-VAE
-@File       : utils_ts.py
+@File       : utils_time_series.py
 @Author     : boyue.ht
 @Version    : 1.0
 @CreateTime : 2023/2/14
@@ -12,10 +12,28 @@
 """
 
 import numpy as np
+import pandas as pd
 
 from src.common.constant import SRParams, CSDParams
 from src.common.exception import CommonException
 from src.common.utils_smooth import ma_smooth, ext_smooth
+
+
+def series_verify(x):
+    """
+    Determine whether the format of input KPI time series meets expectations, and convert it to np.ndarray.
+
+    :param x:
+    :return:
+    """
+
+    if isinstance(x, (list, pd.Series, pd.DataFrame,)):
+        x = np.array(x)
+    elif not isinstance(x, np.ndarray):
+        err = f'Input type {type(x)} is unexpected，only support "list", "np.ndarray", "pd.Series".'
+        raise CommonException(err)
+
+    return x.astype(float)
 
 
 def constant_detect(x: np.ndarray, **kwargs):
