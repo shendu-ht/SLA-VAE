@@ -67,7 +67,7 @@ def p_window_ext(x: np.ndarray, pre_window: int, post_window: int, day_window: i
                     x[:, idx - day_window - pre_window: idx - day_window + 1]
                 x_window = np.concatenate((pre_day_pre, pre_day_post, cur_day), axis=1)
     else:
-        err = f'Periodic window extraction, dim>=3 is not supported.'
+        err = 'Periodic window extraction, dim>=3 is not supported.'
         raise CommonException(err)
     return x_window
 
@@ -98,7 +98,7 @@ def f_window_ext(x: np.ndarray, window: int, idx: int):
             return x[:, :idx + 1]
         return x[:, idx - window: idx + 1]
     else:
-        err = f'Fix window extraction, dim>=3 is not supported.'
+        err = 'Fix window extraction, dim>=3 is not supported.'
         raise CommonException(err)
 
 
@@ -113,7 +113,7 @@ def e_window_ext(x: np.ndarray, sample_size: int, type_: str = 'up'):
     """
 
     if type_ not in ('up', 'fall'):
-        err = f'Extreme window extraction, input type_ only support "up" and "fall".'
+        err = 'Extreme window extraction, input type_ only support "up" and "fall".'
         raise CommonException(err)
 
     dim = len(x.shape)
@@ -127,6 +127,6 @@ def e_window_ext(x: np.ndarray, sample_size: int, type_: str = 'up'):
             x_window[i, :] = x[i, sort_idxes[i, :sample_size]] if type_ == 'fall' else x[
                 i, sort_idxes[i, -sample_size:]]
     else:
-        err = f'Extreme window extraction, dim>=3 is not supported.'
+        err = 'Extreme window extraction, dim>=3 is not supported.'
         raise CommonException(err)
     return x_window

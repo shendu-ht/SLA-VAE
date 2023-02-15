@@ -10,6 +10,15 @@
 @LastModifiedTime: 2023/2/14
 @Description:
 """
+import os
+
+
+def get_abs_path():
+    """Generate the absolute path of this project. Avoid the risks caused by path adjustment."""
+
+    paths = os.getcwd().split('/')
+    idx = [i for i in range(len(paths)) if paths[i] == 'SLA-VAE']
+    return '/'.join(paths[:idx[-1] + 1])
 
 
 class CSDParams:
@@ -140,3 +149,69 @@ class KDEParams:
 
     # Significance of Hypothesis Test
     SIGNIFICANCE = 1e-3
+
+
+class KPIADParams:
+    """Default Hyperparameters of KPI Anomaly Detection"""
+
+    # The default number of features
+    FEATURE_NUM = 12
+
+    """Build Model"""
+
+    # hidden layers
+    HIDDEN_LAYERS = [64, 48, 32]
+
+    # latent var
+    LATENT_LEN = 32
+
+    """Param/Path"""
+
+    # Definite Absolute Path
+    ABSOLUTE_PATH = get_abs_path()
+
+    # Param Path
+    PARAM_PATH = './data/param/single_kpi/kpi_ad_param.pkl'
+
+    # Sample Path
+    SAMPLE_PATH = './data/sample/single_kpi/sample_sets.txt'
+
+
+class MultiKPIADParams:
+    """Default Hyperparameters of Multiple KPI Anomaly Detection"""
+
+    # The multiple KPIs corresponding to the provided samples in this project
+    METRIC_LIST = [
+        'cpu_usage',
+        'load1',
+        'load_per_cpu',
+        'mem_pct_used',
+        'mem_psc_used',
+        'net_speed_recv',
+        'net_speed_sent',
+        'disk_use',
+        'io_usage',
+        'proc_blocked_current'
+    ]
+
+    # The default number of features
+    FEATURE_NUM = 6
+
+    """Build Model"""
+
+    # hidden layers
+    HIDDEN_LAYERS = [128, 64, 32]
+
+    # latent var
+    LATENT_LEN = 32
+
+    """Param/Path"""
+
+    # Definite Absolute Path
+    ABSOLUTE_PATH = get_abs_path()
+
+    # Param Path
+    PARAM_PATH = './data/param/multiple_kpi/multi_kpi_ad_param.pkl'
+
+    # Sample Path
+    SAMPLE_PATH = './data/sample/multiple_kpi/sample_sets.txt'
